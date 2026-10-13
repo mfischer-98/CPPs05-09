@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 13:12:08 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/13 15:06:01 by mefische         ###   ########.fr       */
+/*   Updated: 2026/10/13 15:22:37 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ Bureaucrat::Bureaucrat() : _name("Default"), _grade(150) {
 }
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name), _grade (grade) {
-	//how to catch invalid numbers?
+	if (_grade < 1)
+		throw GradeTooHighException();
+	else if (_grade > 150)
+		throw GradeTooLowException();
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(other._grade) {
@@ -42,17 +45,25 @@ int Bureaucrat::getGrade(void) const {
 
 // Member Functions
 void Bureaucrat::incrementGrade() {
-	this->_grade -= 1;
-	//if (this->_grade < 1)
-		//gradetoohigh
+	if (_grade - 1 < 1)
+		throw GradeTooHighException();
+	_grade -= 1;
 }
 
 void Bureaucrat::decrementGrade() {
-	this->_grade += 1;
-	//if (this->_grade > 150)
-		//gradetoolow
+	if (_grade + 1 > 150)
+		throw GradeTooLowException();
+	_grade += 1;
 }
 
+// Exceptions
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
+	return "Grade too high.";
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw() {
+	return "Grade too low.";
+}
 
 // Operator overload
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& bureaucrat) {

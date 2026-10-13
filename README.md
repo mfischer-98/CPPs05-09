@@ -25,3 +25,5 @@ Exceptions:
 			virtual ~exception() throw();
 			virtual const char* what() const throw();
 		}
+
+		https://en.cppreference.com/cpp/error/exception/what

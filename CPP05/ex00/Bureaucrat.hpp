@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 13:12:02 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/13 15:05:43 by mefische         ###   ########.fr       */
+/*   Updated: 2026/10/13 15:22:51 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <string>
+# include <exception>
 
 class Bureaucrat {
 	private:
@@ -22,10 +23,11 @@ class Bureaucrat {
 		int	_grade;
 	public:
 		// Canonical Form
-		Bureaucrat(); // "Default" and 150
-		Bureaucrat(const std::string &name, int grade); //highest grade = 1 and lowest = 150
+		Bureaucrat();
+		Bureaucrat(const std::string &name, int grade);
 		Bureaucrat(const Bureaucrat& other);
-		Bureaucrat& operator=(const Bureaucrat& other); //only copy grade because name is const and we do not need to copy name, since that's the way to identify each bureaucrat
+		Bureaucrat& operator=(const Bureaucrat& other); 
+		//only copy grade because name is const and we do not need to copy name, since that's the way to identify each bureaucrat
 		~Bureaucrat();
 
 		// Getters
@@ -36,11 +38,16 @@ class Bureaucrat {
 		void incrementGrade(void); //decrease number
 		void decrementGrade(void); //increase number
 
-		class GradeTooHighException : std::exception {};
-		class GradeTooLowException :  std::exception {};
+		class GradeTooHighException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+		class GradeTooLowException :  public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
 };
 
-// overload << operator to print: "NAME, bureaucrat grade GRADE."
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& bureaucrat);
 
 #endif

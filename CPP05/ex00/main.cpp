@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 13:17:32 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/13 15:06:14 by mefische         ###   ########.fr       */
+/*   Updated: 2026/10/13 15:08:46 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,5 @@
 int main() {
 	std::cout << "test" << std::endl;
 	//test everything!!
+	//try catch
 }
