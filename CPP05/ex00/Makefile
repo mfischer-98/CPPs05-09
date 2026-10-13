@@ -6,13 +6,13 @@
 #    By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/13 13:12:06 by mefische          #+#    #+#              #
-#    Updated: 2026/10/13 13:45:45 by mefische         ###   ########.fr        #
+#    Updated: 2026/10/13 15:04:19 by mefische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = bureaucrat
 
-SRC = src/main.cpp src/Animal.cpp src/Cat.cpp src/Dog.cpp src/WrongAnimal.cpp src/WrongCat.cpp
+SRC = main.cpp Bureaucrat.cpp
 OBJ = $(SRC:.cpp=.o)
 CC  = c++ -Wall -Wextra -Werror -std=c++98 -g
 

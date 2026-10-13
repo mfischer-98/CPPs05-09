@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 13:12:02 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/13 14:20:18 by mefische         ###   ########.fr       */
+/*   Updated: 2026/10/13 15:05:43 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Bureaucrat {
 	public:
 		// Canonical Form
 		Bureaucrat(); // "Default" and 150
-		Bureaucrat(const std::string name, int grade); //highest grade = 1 and lowest = 150
+		Bureaucrat(const std::string &name, int grade); //highest grade = 1 and lowest = 150
 		Bureaucrat(const Bureaucrat& other);
 		Bureaucrat& operator=(const Bureaucrat& other); //only copy grade because name is const and we do not need to copy name, since that's the way to identify each bureaucrat
 		~Bureaucrat();
@@ -33,11 +33,11 @@ class Bureaucrat {
 		int getGrade(void) const;
 
 		// Member Functions
-		void incrementGrade(int number); //decrease number
-		void decrementGrade(int number); //increase number
+		void incrementGrade(void); //decrease number
+		void decrementGrade(void); //increase number
 
 		class GradeTooHighException : std::exception {};
-		class GradeTooLowException : ... {}
+		class GradeTooLowException :  std::exception {};
 };
 
 // overload << operator to print: "NAME, bureaucrat grade GRADE."
