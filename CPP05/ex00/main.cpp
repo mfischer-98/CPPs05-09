@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 13:17:32 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/15 14:46:40 by mefische         ###   ########.fr       */
+/*   Updated: 2026/10/15 15:05:07 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ int main() {
 			throw is called and the object is never completed, so no destructor called either
 		- exception&, & because it refers to the object related to what
 		- e is just a convention, it could be another name
-		- const because what is a const member function
-	*/
+		- const because what is a const member function */
 	std::cout << " - Test 2 -" << std::endl;
 	try {
 		Bureaucrat c("Gerald", 200);
