@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 15:03:46 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/15 15:39:52 by mefische         ###   ########.fr       */
+/*   Updated: 2026/10/15 16:24:40 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #define FORM_HPP
 
 # include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form {
 	private:
@@ -31,12 +33,12 @@ class Form {
 
 	// Getters
 		std::string getName(void) const;
-		bool getSigned(void) const;
-		int getRequiredGrade(void) const;
-		int getExecGrade(void) const;
+		bool getSigned(void);
+		int getRequiredGrade(void);
+		int getExecGrade(void);
 
 	// Member Functions
-		void beSigned(Bureaucrat& b);
+		void beSigned(const Bureaucrat& b);
 
 	// Exceptions
 		class GradeTooHighException : public std::exception {
@@ -49,7 +51,7 @@ class Form {
 		};
 };
 
-std::ostream& operator<<(std::ostream& out, const Form& form);
+std::ostream& operator<<(std::ostream& out, Form& form);
 
 
 #endif

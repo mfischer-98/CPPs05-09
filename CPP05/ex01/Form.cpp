@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 15:03:50 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/15 15:46:09 by mefische         ###   ########.fr       */
+/*   Updated: 2026/10/15 16:26:18 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ Form::Form() : _name("Default"), _signed(false), _requiredGrade(150), _execGrade
 }
 
 Form::Form(const std::string &name, const int req, const int exec) : _name(name), _signed(false), _requiredGrade(req), _execGrade(exec) {
-	if (_requiredGrade || _execGrade < 1)
+	if ((_requiredGrade < 1) || (_execGrade < 1))
 		throw GradeTooHighException();
-	else if (_requiredGrade || _execGrade > 150)
+	else if ((_requiredGrade > 150) || (_execGrade > 150))
 		throw GradeTooLowException();
 	std::cout << "Form constructor called" << std::endl;
 }
@@ -31,12 +31,7 @@ Form::Form(const Form& other) : _name(other._name), _signed(other._signed), _req
 Form& Form::operator=(const Form& other) {
 	std::cout << "Form assignment operator called" << std::endl;
 	if (this != &other)
-	{
-		this->_name = other._name;
 		this->_signed = other._signed;
-		this->_requiredGrade = other._requiredGrade;
-		this->_execGrade = other._execGrade;
-	}
 	return *this;
 }
 
@@ -46,32 +41,32 @@ Form::~Form() {
 
 
 // Getters
-const std::string Form::getName(void) {
+std::string Form::getName(void) const {
 	return _name;
 }
 
-const bool Form::getSigned(void) {
+bool Form::getSigned(void) {
 	return _signed;
 }
 
-const int Form::getRequiredGrade(void) {
+int Form::getRequiredGrade(void) {
 	return _requiredGrade;
 }
 
-cont int Form::getExecGrade(void) {
+int Form::getExecGrade(void) {
 	return _execGrade;
 }
 
 
 // Member Functions
-void	Form::beSigned(Bureaucrat& b) {
-	if (b->_grade <= _requiredGrade)
+void	Form::beSigned(const Bureaucrat& b) {
+	if (b.getGrade() <= _requiredGrade)
 	{
 		_signed = true;
-		std::cout << b << " signed " << _name;
+		std::cout << b << " signed " << _name << std::endl;
 	}
 	else
-		std::cout << b << " couldn’t sign " << _name << " because grade is too low" << std::endl;
+		throw GradeTooLowException();
 }
 
 // Exceptions
@@ -84,10 +79,10 @@ const char* Form::GradeTooLowException::what() const throw() {
 }
 
 // Overload
-std::ostream& operator<<(std::ostream& out, const Form& form) {
-	std::cout << "Form name: " << _name << std::endl;
-	std::cout << "Signature status: " << _signed << std::endl;
-	std::cout << "Required grade to sign: " << _name << std::endl;
-	std::cout << "Required grade to execute: " << _name << std::endl;
+std::ostream& operator<<(std::ostream& out, Form& form) {
+	out << "Form name: " << form.getName() << std::endl;
+	out << "Signature status: " << form.getSigned() << std::endl;
+	out << "Required grade to sign: " << form.getRequiredGrade() << std::endl;
+	out << "Required grade to execute: " << form.getExecGrade() << std::endl;
 	return out;
 }

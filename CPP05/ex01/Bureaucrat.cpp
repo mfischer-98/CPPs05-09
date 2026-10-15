@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 13:12:08 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/15 14:42:56 by mefische         ###   ########.fr       */
+/*   Updated: 2026/10/15 16:19:18 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,17 @@ void Bureaucrat::decrementGrade() {
 		throw GradeTooLowException();
 	_grade += 1;
 }
+
+void Bureaucrat::signForm(Form& form) {
+	try {
+		form.beSigned(*this);
+	}
+	catch (const std::exception& e) {
+		std::cout << e.what() << std::endl;
+		std::cout << _name << " coudn't sign " << form << " because grade is too low." << std::endl;
+	}
+}
+
 
 // Exceptions
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
