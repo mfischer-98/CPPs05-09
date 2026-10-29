@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 15:03:50 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/15 16:26:18 by mefische         ###   ########.fr       */
+/*   Updated: 2026/10/29 11:54:10 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,17 @@ int Form::getExecGrade(void) {
 
 // Member Functions
 void	Form::beSigned(const Bureaucrat& b) {
-	if (b.getGrade() <= _requiredGrade)
-	{
-		_signed = true;
-		std::cout << b << " signed " << _name << std::endl;
+	if (_signed == true)
+		std::cout << "Form already signed." << std::endl;
+	else {
+		if (b.getGrade() <= _requiredGrade)
+		{
+			_signed = true;
+			std::cout << b << " signed " << _name << std::endl;
+		}
+		else if (b.getGrade() > _requiredGrade)
+			throw GradeTooLowException();
 	}
-	else
-		throw GradeTooLowException();
 }
 
 // Exceptions
