@@ -30,7 +30,6 @@ class Bureaucrat {
 		Bureaucrat(const std::string &name, int grade);
 		Bureaucrat(const Bureaucrat& other);
 		Bureaucrat& operator=(const Bureaucrat& other); 
-		//only copy grade because name is const and we do not need to copy name, since that's the way to identify each bureaucrat
 		~Bureaucrat();
 
 		// Getters
@@ -38,8 +37,8 @@ class Bureaucrat {
 		int getGrade(void) const;
 
 		// Member Functions
-		void incrementGrade(void); //decrease number
-		void decrementGrade(void); //increase number
+		void incrementGrade(void);
+		void decrementGrade(void);
 		void signForm(Form& form);
 
 		class GradeTooHighException : public std::exception {

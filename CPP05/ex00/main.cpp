@@ -16,8 +16,8 @@ int main() {
 	/* Functionality tests */
 	std::cout << " - Test 0 - " << std::endl;
 	Bureaucrat testA("Test A", 3);
-	Bureaucrat testB("Test B", 3);
-	
+	Bureaucrat testB("Test B", 4);
+
 	Bureaucrat copy(testA);
 	testB = copy;
 	

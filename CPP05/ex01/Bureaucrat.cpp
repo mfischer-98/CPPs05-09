@@ -67,7 +67,7 @@ void Bureaucrat::signForm(Form& form) {
 	}
 	catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << _name << " coudn't sign " << form << " because grade is too low." << std::endl;
+		std::cout << _name << " coudn't sign " << form.getName() << " because grade is too low." << std::endl;
 	}
 }
 
@@ -83,6 +83,6 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() {
 
 // Operator overload
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& bureaucrat) {
-	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << ".";
+	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
 	return out;
 }
