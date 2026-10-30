@@ -6,11 +6,12 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 15:03:50 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/29 11:54:10 by mefische         ###   ########.fr       */
+/*   Updated: 2026/10/30 10:42:21 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 Form::Form() : _name("Default"), _signed(false), _requiredGrade(150), _execGrade(150) {
 	std::cout << "Form default constructor called" << std::endl;
@@ -45,45 +46,37 @@ std::string Form::getName(void) const {
 	return _name;
 }
 
-bool Form::getSigned(void) {
+bool Form::getSigned(void) const {
 	return _signed;
 }
 
-int Form::getRequiredGrade(void) {
+int Form::getRequiredGrade(void) const {
 	return _requiredGrade;
 }
 
-int Form::getExecGrade(void) {
+int Form::getExecGrade(void) const {
 	return _execGrade;
 }
 
-
 // Member Functions
 void	Form::beSigned(const Bureaucrat& b) {
-	if (_signed == true)
-		std::cout << "Form already signed." << std::endl;
-	else {
-		if (b.getGrade() <= _requiredGrade)
-		{
-			_signed = true;
-			std::cout << b << " signed " << _name << std::endl;
-		}
-		else if (b.getGrade() > _requiredGrade)
-			throw GradeTooLowException();
-	}
+	if (b.getGrade() <= _requiredGrade)
+		_signed = true;
+	else
+		throw GradeTooLowException();
 }
 
 // Exceptions
 const char* Form::GradeTooHighException::what() const throw() {
-	return "Grade too high for the form.";
+	return "Grade is too high.";
 }
 
 const char* Form::GradeTooLowException::what() const throw() {
-	return "Grade too low for the form.";
+	return "Grade is too low.";
 }
 
 // Overload
-std::ostream& operator<<(std::ostream& out, Form& form) {
+std::ostream& operator<<(std::ostream& out, const Form& form) {
 	out << "Form name: " << form.getName() << std::endl;
 	out << "Signature status: " << form.getSigned() << std::endl;
 	out << "Required grade to sign: " << form.getRequiredGrade() << std::endl;

@@ -6,14 +6,16 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 15:03:46 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/15 16:24:40 by mefische         ###   ########.fr       */
+/*   Updated: 2026/10/30 10:42:29 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORM_HPP
 #define FORM_HPP
 
-# include "Bureaucrat.hpp"
+# include <iostream>
+# include <string>
+# include <exception>
 
 class Bureaucrat;
 
@@ -33,9 +35,9 @@ class Form {
 
 	// Getters
 		std::string getName(void) const;
-		bool getSigned(void);
-		int getRequiredGrade(void);
-		int getExecGrade(void);
+		bool getSigned(void) const;
+		int getRequiredGrade(void) const;
+		int getExecGrade(void) const;
 
 	// Member Functions
 		void beSigned(const Bureaucrat& b);
@@ -51,7 +53,6 @@ class Form {
 		};
 };
 
-std::ostream& operator<<(std::ostream& out, Form& form);
-
+std::ostream& operator<<(std::ostream& out, const Form& form);
 
 #endif
