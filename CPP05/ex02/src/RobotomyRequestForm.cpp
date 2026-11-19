@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 11:18:41 by mefische          #+#    #+#             */
-/*   Updated: 2026/11/19 15:53:56 by mefische         ###   ########.fr       */
+/*   Updated: 2026/11/19 16:13:54 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 #include <cstdlib>
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45), _target("Not specified") {
-	std::cout << "Form default constructor called" << std::endl;
+	std::cout << "RobotomyRequestForm default constructor called" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("RobotomyRequestForm", 72, 45), _target(target) {
-	std::cout << "Form default constructor called" << std::endl;
+	std::cout << "RobotomyRequestForm default constructor called" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) : AForm(other), _target(other._target) {
-	std::cout << "Form copy constructor called" << std::endl;
+	std::cout << "RobotomyRequestForm copy constructor called" << std::endl;
 }
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& other) {
-	std::cout << "Form assignment operator called" << std::endl;
+	std::cout << "RobotomyRequestForm assignment operator called" << std::endl;
 	AForm::operator=(other);
 	return *this;
 }

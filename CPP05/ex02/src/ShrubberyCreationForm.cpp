@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 11:18:43 by mefische          #+#    #+#             */
-/*   Updated: 2026/11/19 16:01:04 by mefische         ###   ########.fr       */
+/*   Updated: 2026/11/19 16:14:09 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 #include <cstdlib>
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 145, 137), _target("Not specified") {
-	std::cout << "Form default constructor called" << std::endl;
+	std::cout << "ShrubberyCreationForm default constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm("ShrubberyCreationForm", 145, 137), _target(target) {
-	std::cout << "Form default constructor called" << std::endl;
+	std::cout << "ShrubberyCreationForm default constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) :  AForm(other), _target(other._target) {
-	std::cout << "Form copy constructor called" << std::endl;
+	std::cout << "ShrubberyCreationForm copy constructor called" << std::endl;
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other) {
-	std::cout << "Form assignment operator called" << std::endl;
+	std::cout << "ShrubberyCreationForm assignment operator called" << std::endl;
 	AForm::operator=(other);
 	return *this;
 }
