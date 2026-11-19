@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 10:50:09 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/30 11:27:08 by mefische         ###   ########.fr       */
+/*   Updated: 2026/11/19 15:27:17 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ class RobotomyRequestForm: public AForm {
 		~RobotomyRequestForm();
 
 		// Member function
-		void execute(Bureaucrat const & executor);
-		// Makes some drilling noises, then informs that <target> has been robotomized successfully 50% of the time. Otherwise, it informs that the robotomy failed.
+		void execute(Bureaucrat const & executor) const;
 };

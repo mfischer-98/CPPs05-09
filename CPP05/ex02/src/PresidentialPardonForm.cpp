@@ -6,11 +6,13 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 11:18:38 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/30 11:42:41 by mefische         ###   ########.fr       */
+/*   Updated: 2026/11/19 15:53:52 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/PresidentialPardonForm.hpp"
+#include "../inc/Bureaucrat.hpp"
+#include <cstdlib>
 
 PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5), _target("Not specified") {
 	std::cout << "PresidentialPardonForm default constructor called" << std::endl;
@@ -35,6 +37,10 @@ PresidentialPardonForm::~PresidentialPardonForm() {
 }
 
 
-void PresidentialPardonForm::execute(Bureaucrat const & executor) {
-	std::cout << "Executed " << AForm::getName() << std::endl;
+void PresidentialPardonForm::execute(Bureaucrat const & executor) const {
+	if (!getSigned())
+		throw FormNotSignedException();
+	if (executor.getGrade() > getExecGrade())
+		throw GradeTooLowException();
+	std::cout << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }

@@ -6,13 +6,13 @@
 #    By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/13 13:12:06 by mefische          #+#    #+#              #
-#    Updated: 2026/10/15 16:15:52 by mefische         ###   ########.fr        #
+#    Updated: 2026/11/19 15:04:11 by mefische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = bureaucrat
 
-SRC = main.cpp Bureaucrat.cpp Form.cpp
+SRC = src/main.cpp src/Bureaucrat.cpp src/AForm.cpp src/PresidentialPardonForm.cpp src/RobotomyRequestForm.cpp src/ShrubberyCreationForm.cpp
 OBJ = $(SRC:.cpp=.o)
 CC  = c++ -Wall -Wextra -Werror -std=c++98 -g
 

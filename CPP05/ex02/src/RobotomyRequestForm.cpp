@@ -6,22 +6,23 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 11:18:41 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/30 11:39:14 by mefische         ###   ########.fr       */
+/*   Updated: 2026/11/19 15:53:56 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/RobotomyRequestForm.hpp"
+#include "../inc/Bureaucrat.hpp"
+#include <cstdlib>
 
-RobotomyRequestForm::RobotomyRequestForm() : _name("RobotomyRequestForm"), _signed(false), _requiredGrade(72), _execGrade(45) {
-	_target = "Not specified";
+RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45), _target("Not specified") {
 	std::cout << "Form default constructor called" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : _name("RobotomyRequestForm"), _signed(false), _requiredGrade(72), _execGrade(45), _target(target) {
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("RobotomyRequestForm", 72, 45), _target(target) {
 	std::cout << "Form default constructor called" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const Form& other) : _name(other._name), _signed(other._signed), _requiredGrade(other._requiredGrade), _execGrade(other._execGrade) {
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) : AForm(other), _target(other._target) {
 	std::cout << "Form copy constructor called" << std::endl;
 }
 
@@ -32,9 +33,19 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& o
 }
 
 RobotomyRequestForm::~RobotomyRequestForm() {
-	std::cout << "Form " << _name << " destructor called" << std::endl;
+	std::cout << "Form " << getName() << " destructor called" << std::endl;
 }
 
-void RobotomyRequestForm::execute(Bureaucrat const & executor) {
-	std::cout << "Executed " << _name << std::endl;
+void RobotomyRequestForm::execute(Bureaucrat const & executor) const {
+	if (!getSigned())
+		throw FormNotSignedException();
+	if (executor.getGrade() > getExecGrade())
+		throw GradeTooLowException();
+	if (rand() % 2)
+	{
+		std::cout << "* WHIRRRR... DRRRRRRR... VRRRRRRRR... *" << std::endl;
+		std::cout << _target << " has been robotomized." << std::endl;
+	}
+	else
+		std::cout << _target << " robotomy failed." << std::endl;
 }

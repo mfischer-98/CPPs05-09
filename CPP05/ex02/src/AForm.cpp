@@ -6,12 +6,12 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 15:03:50 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/30 10:58:49 by mefische         ###   ########.fr       */
+/*   Updated: 2026/11/19 15:38:17 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
-#include "Bureaucrat.hpp"
+#include "../inc/AForm.hpp"
+#include "../inc/Bureaucrat.hpp"
 
 AForm::AForm() : _name("Default"), _signed(false), _requiredGrade(150), _execGrade(150) {
 	std::cout << "Form default constructor called" << std::endl;
@@ -25,7 +25,7 @@ AForm::AForm(const std::string &name, const int req, const int exec) : _name(nam
 	std::cout << "Form constructor called" << std::endl;
 }
 
-AForm::AForm(const Form& other) : _name(other._name), _signed(other._signed), _requiredGrade(other._requiredGrade), _execGrade(other._execGrade) {
+AForm::AForm(const AForm& other) : _name(other._name), _signed(other._signed), _requiredGrade(other._requiredGrade), _execGrade(other._execGrade) {
 	std::cout << "Form copy constructor called" << std::endl;
 }
 
@@ -73,6 +73,10 @@ const char* AForm::GradeTooHighException::what() const throw() {
 
 const char* AForm::GradeTooLowException::what() const throw() {
 	return "Grade is too low.";
+}
+
+const char* AForm::FormNotSignedException::what() const throw() {
+	return "Form is not signed, so it cannot be executed.";
 }
 
 // Overload

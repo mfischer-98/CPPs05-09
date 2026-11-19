@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 10:49:16 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/30 11:27:22 by mefische         ###   ########.fr       */
+/*   Updated: 2026/11/19 15:27:09 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <iostream>
 # include <string>
 # include <exception>
+#include <fstream>
 
 class ShrubberyCreationForm: public AForm {
 	protected:
@@ -28,6 +29,5 @@ class ShrubberyCreationForm: public AForm {
 		~ShrubberyCreationForm();
 
 		// Member function
-		void execute(Bureaucrat const & executor);
-		// Creates a file <target>_shrubbery in the working directory and writes ASCII trees inside it.
+		void execute(Bureaucrat const & executor) const;
 };

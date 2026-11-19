@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 10:50:57 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/30 11:27:15 by mefische         ###   ########.fr       */
+/*   Updated: 2026/11/19 15:27:21 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ class PresidentialPardonForm: public AForm {
 		~PresidentialPardonForm();
 
 		// Member function
-		void execute(Bureaucrat const & executor);
-		// Informs that <target> has been pardoned by Zaphod Beeblebrox.
+		void execute(Bureaucrat const & executor) const;
+
 };

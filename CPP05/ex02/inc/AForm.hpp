@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 15:03:46 by mefische          #+#    #+#             */
-/*   Updated: 2026/10/30 11:26:40 by mefische         ###   ########.fr       */
+/*   Updated: 2026/11/19 15:37:38 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ class AForm {
 				virtual const char* what() const throw();
 		};
 		class GradeTooLowException :  public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+		class FormNotSignedException :  public std::exception {
 			public:
 				virtual const char* what() const throw();
 		};
