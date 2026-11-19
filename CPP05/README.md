@@ -1,3 +1,9 @@
+# CPP Module 05 — Repetition and Exceptions
+
+This module introduces **C++ exceptions** (`try`, `throw`, `catch`), custom exception classes inheriting from `std::exception`, abstract base classes (`AForm`), and polymorphic object creation through a simple factory (`Intern`)—all written in **C++98** following Orthodox Canonical Form.
+
+---
+
 ## Exceptions: try / throw / catch basics
 
 An exception is a way for code to signal "I can't continue normally"
@@ -40,6 +46,8 @@ catch (const SomeException& e) {
 - **Check before modifying:** validating first means a failed call leaves
   the object unchanged.
 
+---
+
 ## ex00: Bureaucrat
 
 A `Bureaucrat` has a constant name and a grade from 1 (highest) to 150 (lowest).
@@ -55,13 +63,44 @@ A `Bureaucrat` has a constant name and a grade from 1 (highest) to 150 (lowest).
 - **Orthodox Canonical Form** is implemented. `operator=` copies only the
   grade because `_name` is `const`.
 
-### Concepts learned
-- Constructor throws -> no object, no destructor call.
-- Catch by (const) reference to avoid slicing.
-- Destruction order is the reverse of construction order.
-- `T x = y;` is copy construction; `x = y;` is assignment.
-- An uncaught exception calls `std::terminate`.
+---
 
-### Tests (main.cpp)
-Valid creation, copy/assignment, invalid grades (200, -10),
-and increment/decrement at the limits (1 and 150).
+## ex01: Form
+
+Introduces a `Form` class with a constant name, a boolean `_signed` flag (default `false`), and constant grade requirements to sign and execute.
+
+### Design decisions
+- **`beSigned()` validates the bureaucrat's grade.** If the bureaucrat's grade is numerically greater than `_gradeToSign`, it throws `Form::GradeTooLowException`.
+- **`Bureaucrat::signForm()` catches internally.** Instead of letting exceptions crash `main`, `signForm()` wraps `beSigned()` in `try/catch` and prints either `<bureaucrat> signed <form>` or `<bureaucrat> couldn't sign <form> because <reason>`.
+
+---
+
+## ex02: Concrete Forms & Abstract `AForm`
+
+`Form` becomes an abstract base class (`AForm`) with three concrete implementations:
+- **`ShrubberyCreationForm` (sign 145, exec 137):** Writes ASCII trees to `<target>_shrubbery`.
+- **`RobotomyRequestForm` (sign 72, exec 45):** Makes drilling noises and succeeds 50% of the time (`rand()`).
+- **`PresidentialPardonForm` (sign 25, exec 5):** Announces that `<target>` has been pardoned by Zaphod Beeblebrox.
+
+### Design decisions
+- **Shared validation in `AForm::execute()`.** Checking whether the form is signed (`FormNotSignedException`) and whether the executor's grade is sufficient (`GradeTooLowException`) happens once in the base class before calling a pure virtual hook (`executeAction()`).
+- **Virtual destructor (`virtual ~AForm()`).** Essential whenever deleting derived forms through an `AForm*` pointer.
+
+---
+
+## ex03: Intern (`makeForm` & `switch` dispatch)
+
+Implements an `Intern` class whose `makeForm(name, target)` method dynamically allocates and returns the matching `AForm*`, or prints an error and returns `NULL` if the name is unknown.
+
+### How `switch` works & why it was used here
+The subject forbids long `if / else if / else` chains. In C++98, `switch` only evaluates **integral types** (`int`, `char`, `enum`)—not `std::string`. To use `switch` cleanly:
+1. Store the valid form names (`"presidential pardon"`, `"robotomy request"`, `"shrubbery creation"`) in a fixed array.
+2. Loop through the array to find the matching index `i`.
+3. If `i == 3`, print an error message to `std::cerr` and return `NULL` early.
+4. Otherwise, pass `i` into `switch (i)` to instantiate and return the right derived form with `new`.
+
+### What I learned across CPP05
+- **Exceptions + Polymorphism:** Derived classes can throw specific exceptions and still be caught uniformly by base reference (`const std::exception&`).
+- **Centralizing preconditions:** Putting signature and grade checks in `AForm::execute()` prevents duplicated validation across every concrete form.
+- **`switch` limitations in C++98:** Strings cannot be switched on directly; mapping a string to an integer index first keeps dispatch flat and readable (an alternative is an array of member function pointers).
+- **Caller ownership with `new`:** Returning `AForm*` from a factory transfers heap ownership to the caller—every valid pointer must be freed with `delete`, relying on `virtual ~AForm()` for proper cleanup.
